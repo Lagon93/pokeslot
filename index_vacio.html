@@ -1,0 +1,300 @@
+ <!doctype html>
+ <html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>Tragaperras Pokemon</title>
+      <style type="text/css">
+          body{
+            margin:auto;
+            font-family: 'Helvetica', sans-serif;
+          }
+          img{
+            max-width:100%;
+            vertical-align:top;
+          }
+          section{
+            position:relative;
+            width:550px;
+            margin:auto;
+            margin-top:20px;
+          }	
+          .ventanas,.botones{
+            display:flex;
+            justify-content:center;
+            margin-bottom:12px;
+          }
+          .ventana:nth-child(2),.boton:nth-child(2){
+            margin:auto 16px;        
+          }
+          .ventana{
+            padding:6px;
+            width:150px;
+            height:150px;
+            border:4px solid rgb(40, 73, 134);
+            border-radius:12px;
+            display:flex;
+            align-items:center;
+            justify-content:center;           
+          }
+          .boton{
+            padding:6px;
+            box-shadow:0 0 12px black inset;
+            width:150px;
+            height:40px;
+            border:4px solid rgb(40, 73, 134);
+            border-radius:12px;
+            text-align:center;
+            line-height:40px;
+            font-size:1.1em;
+            background-color:#fff0c9;
+            color:black;
+            cursor:pointer;
+            user-select:none;
+            -moz-user-select:none;
+          }
+          .boton:hover,#lanzar:hover{
+            background-color:white;
+            box-shadow:0 0 13px rgb(40, 73, 134);
+            transform: rotate(360deg)
+            
+          }
+          header{
+            height:168px;
+          }
+          #disponible{
+            display:flex;
+            align-items:center;
+          }
+          #credito{
+            color:orange;
+            font-size:1.4em;
+          }
+          #dinero{
+            font-size:5em;
+            line-height:30px;
+          }
+          #lanzar{
+            transition: transform .5s ease-in-out;
+            cursor:pointer;
+            /*padding:15px 18px 15px 10px;*/
+            user-select:none;
+            -moz-user-select:none;
+            width:180px;
+            height:180px;
+            border-radius:50%;
+            border:6px solid rgb(40, 73, 134);
+            text-align:center;
+            font-size:3.9em;
+            line-height:140px;
+            box-shadow:0 0 13px black inset;
+            position:absolute;
+            left:0;
+            right:0;
+            background-color:#fff0c9;
+            margin:auto;
+            top:1px;
+            box-sizing:border-box;
+          }
+          .euros{
+            font-size:1.5rem;
+          }
+          #monedas{
+            width:170px;
+            margin-top:10px;
+          }
+          #monedas img{
+            width:30px;
+            margin-right:3px;
+            margin-bottom:3px;
+          }
+          #velo{
+            display:none;
+            width:100%;
+            height:100%;
+            background-color:rgba(255,255,255,0.5);
+            position:fixed;
+            top:0;
+            left:0;
+            justify-content:center;
+            user-select:none;
+            -moz-user-select:none;       
+          }
+          #cuadro_mensaje{
+            width:540px;
+            height:105px;
+            border-radius:12px;
+            border:5px solid rgb(40, 73, 134);
+            background-color:rgba(255,255,255,0.9);
+            position:relative;
+            top:355px;
+            padding:5px;
+          }
+          #mensaje{
+            font-size:1.7em;
+            color:rgb(40, 73, 134);
+            padding:2px;
+            text-align:center;
+          }
+          #cruz{
+            position:absolute;
+            top:5px;
+            right:5px;
+            cursor:pointer;
+          }
+          .moneda{
+            margin-top:5px;
+          }
+
+       </style>
+    <script type="text/javascript">
+
+      /*Variables principales del codigo */
+      var pokemons=["pikachu", "bulbasur","cubone","squirtel", "abra", "magikarp"];
+      var Minicio=parseInt(Math.random() * (6) + 10);
+
+      /*Funcion inicial con los eventos .onclick y la generacion de las monedas iniciales */
+      window.onload=inici;
+      
+      function inici(){    
+        document.querySelector("#lanzar").onclick=lanzar;
+        document.querySelector("#cruz").onclick=cruz;
+        for(let k=0;k<3;k++){
+          document.querySelectorAll(".boton")[k].onclick=botones;
+        }
+        moneda(Minicio);
+
+      }
+
+      /*Funcion principal de calculo del credito */
+      function moneda(credito){
+        document.querySelector("#dinero").innerHTML=`${credito}<span class="euros">€</span>`;
+        document.getElementById("monedas").innerHTML="";
+        for(let k=0; k<=credito-1; k++){
+          if(k%5==0 && k>0 && k<=15){
+            document.getElementById("monedas").innerHTML+=("beforebegin",'<br>');
+          }
+          document.getElementById("monedas").innerHTML+=("beforebegin",'<img src="img/ficha.png">');
+           
+        }
+      }
+
+      /*Funcion del boton principal redondo que deriva en la funcion ComprobarTirada() */
+      function lanzar(){
+
+        let pokemon=document.querySelectorAll(".ventana")
+        document.getElementById("audio").play();
+        let resul0= parseInt(Math.random() * pokemons.length);
+        pokemon[0].innerHTML=`<img src="img/${pokemons[resul0]}.png">`
+        let resul1= parseInt(Math.random() * pokemons.length);
+        pokemon[1].innerHTML=`<img src="img/${pokemons[resul1]}.png">`
+        let resul2= parseInt(Math.random() * pokemons.length);
+        pokemon[2].innerHTML=`<img src="img/${pokemons[resul2]}.png">`
+        comprobarTirada();   
+      }
+
+      /*Funcion de comprobacion de botones inferiores y llamada a funcion ComprobarTirada() */
+      function botones(){
+          let boton=this.parentNode.children;
+          for(let k=0;k<boton.length;k++){
+            if(this==boton[k]){ 
+              let i = parseInt(Math.random() * pokemons.length)
+            document.querySelectorAll(".ventana")[k].innerHTML=`<img src="img/${pokemons[i]}.png">`;
+            }
+          
+          }
+          comprobarTirada();
+            
+      }
+
+      /*Funcion derivada del evento .onclick de la cruz que aparece en la ventana oculta y que comprueba el resultado final */
+      function cruz(){
+        document.querySelector("#velo").style="display:none";
+        let resul0=document.querySelectorAll(".ventana")[0].innerHTML
+        let resul1=document.querySelectorAll(".ventana")[1].innerHTML
+        let resul2=document.querySelectorAll(".ventana")[2].innerHTML        
+        if(resul0==resul1 && resul1==resul2){
+          Minicio=Minicio+3;
+          moneda(Minicio);
+        }
+      }
+
+      /*Funciones llamadas segun la comprobacion de comprobarTirada()*/
+      function ganar(){
+        document.querySelector("#velo").style="display:flex";
+        document.querySelector("#mensaje").innerHTML='<img src="img/ice.png"> Has ganado tres <img src="img/ficha.png">fichas extra!<img src="img/ice.png">' 
+        document.querySelector("#mensaje").style="padding-top:5%;";
+        document.getElementById("audio3").play();
+      }
+      function perder(){
+        document.querySelector("#dinero").innerHTML=`0<span class="euros">€</span>`;
+        document.querySelector("#velo").style="display:flex";
+        document.querySelector("#mensaje").innerHTML='<img src="img/pokedoll.png"> Te has quedado sin monedas<img src="img/pokedoll.png">' 
+        document.querySelector("#mensaje").style="padding-top:5%;";
+        document.getElementById("audio2").play();
+ 
+      }
+
+      /*Funcion principal que comprueba el resultado de las tiradas */
+      function comprobarTirada(){
+        Minicio--;
+        moneda(Minicio);
+        let resul0=document.querySelectorAll(".ventana")[0].innerHTML
+        let resul1=document.querySelectorAll(".ventana")[1].innerHTML
+        let resul2=document.querySelectorAll(".ventana")[2].innerHTML
+        if(resul0==resul1 && resul1==resul2){
+          ganar();
+        }
+        else if(Minicio<0){
+          perder();
+        }
+      }
+ </script>
+
+</head>
+
+<body>  
+  <section>
+    <header>
+    <div id="disponible">
+    <div id="credito">Crédito: </div>
+    <div id="dinero"><span class="euros">€</span></div></div>
+    <div id="monedas">
+    </div>
+  
+    <div id="lanzar"><img src="img/pokeball.png"></div>
+  </header>
+    <div class="ventanas">
+        <div class="ventana">
+          <img src="img/bulbasur.png">
+        </div>
+        <div class="ventana">
+          <img src="img/bulbasur.png">
+        </div>
+        <div class="ventana">
+          <img src="img/bulbasur.png">
+        </div>
+    </div>
+    <div class="botones">
+        <div class="boton" id="b0">
+          Volver a tirar
+        </div>
+        <div class="boton" id="b1">
+          Volver a tirar
+        </div>
+        <div class="boton" id="b2">
+          Volver a tirar
+        </div>
+    </div>
+  </section>
+  <div id="velo">
+    <div id="cuadro_mensaje">
+      <img id="cruz" src="img/cruz.svg" width="28px">
+
+      <div id="mensaje"></div>
+    </div>
+  </div>
+  <audio id="audio" src="audios/lanzarp.mp3"></audio>
+  <audio id="audio2" src="audios/efe.mp3"></audio>
+  <audio id="audio3" src="audios/win.mp3"></audio>
+   </body>
+ </html>
