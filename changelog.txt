@@ -9,3 +9,13 @@ v1.1
 -Bloqueo de los botones al llegar a 0
 -Cambio del titulo "Crédito" a "Fichas"
 -Cambio de graficos general
+
+
+v1.2
+
+-No se repiten imagenes tras una tirada individual
+-Optimización de codigo
+-Diferentes fondos aleatorios
+-Fondo y fuente modificada del mensaje de alerta
+-Contador de fichas LED
+-Animación de tirada

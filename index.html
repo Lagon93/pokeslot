@@ -4,10 +4,18 @@
       <meta charset="utf-8"/>
       <title>Tragaperras Pokemon</title>
       <style type="text/css">
+          @font-face {
+            font-family: "Led Panel Station Off";
+            src: url(font/Led\ Panel\ Station\ Off.ttf);
+          }
+          @font-face {
+            font-family: "Pokemon Classic";
+            src: url(font/Pokemon\ Classic.ttf);
+          }
           body{
             margin:auto;
             font-family: 'Helvetica', sans-serif;
-            background-color: gray;
+            background-image: url(img/hierba.png);
           }
           img{
             max-width:100%;
@@ -77,13 +85,20 @@
             align-items:center;
 
           }
-          #credito{
+          /*#credito{
             color:orange;
             font-size:1.4em;
+            font-family: "Led Panel Station Off";
+            background-color: black;
+          }*/
+          #dinero, #credito{
+            color:orange;
+            font-size:1.4em;
+            background-color: black;
+            font-family: "Led Panel Station Off";
           }
-          #dinero{
-            font-size:5em;
-            line-height:30px;
+          #fichas{
+            font-family: "Pokemon Classic";
           }
           #lanzar{
             transition: transform .5s ease-in-out;
@@ -136,16 +151,19 @@
             height:105px;
             border-radius:12px;
             border:5px solid rgb(40, 73, 134);
-            background-color:rgba(255,255,255,0.9);
+            /*background-color:rgba(255,255,255,0.9);*/
+            background-image: url(img/piso.png);
             position:relative;
             top:355px;
             padding:5px;
           }
           #mensaje{
             font-size:1.7em;
-            color:rgb(40, 73, 134);
+            color:rgb(255, 255, 255);
             padding:2px;
             text-align:center;
+            text-shadow: #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px,
+             #000 0px 0px 1px,   #000 0px 0px 1px,   #000 0px 0px 1px;
           }
           #cruz{
             position:absolute;
@@ -177,8 +195,57 @@
             max-width: 100%;
             display: inline-flex;
             margin-left: 30vw;
+            background-color:rgb(139, 139, 139);
             border-color: rgb(76, 171, 255);
             padding: 2%;
+          }
+          #animacion{
+            visibility: hidden;
+            padding:6px;
+            width:150px;
+            height:150px;
+            border:4px solid rgb(40, 73, 134);
+            border-radius:12px;
+            position:absolute;
+            align-items:center;
+            justify-content:center;     
+            background-color: aliceblue;
+            display:flex;
+            justify-content:center;
+            margin-bottom:12px;
+            margin-right: 62%;
+          }
+          #animacion1{
+            visibility: hidden;
+            padding:6px;
+            width:150px;
+            height:150px;
+            border:4px solid rgb(40, 73, 134);
+            border-radius:12px;
+            position:absolute;
+            align-items:center;
+            justify-content:center;     
+            background-color: aliceblue;
+            display:flex;
+            justify-content:center;
+            margin-bottom:12px;
+
+          }
+          #animacion2{
+            visibility: hidden;
+            padding:6px;
+            width:150px;
+            height:150px;
+            border:4px solid rgb(40, 73, 134);
+            border-radius:12px;
+            position:absolute;
+            align-items:center;
+            justify-content:center;     
+            background-color: aliceblue;
+            display:flex;
+            justify-content:center;
+            margin-bottom:12px;
+            margin-left: 62%;
           }
 
        </style>
@@ -186,26 +253,27 @@
 
       /*Variables principales del codigo */
       var pokemons=["pikachu", "bulbasur","cubone","squirtel", "abra", "magikarp"];
-      var Minicio=parseInt(Math.random() * (6) + 10);
-
+      var fondo=["hierba","verde","arena","nieve"];
+      var Minicio=parseInt(Math.random() * (6) + 10);     
+      const delay = ms => new Promise(res => setTimeout(res, ms));
       /*Funcion inicial con los eventos .onclick y la generacion de las monedas iniciales */
       window.onload=inici;
       
       function inici(){    
+        let i=parseInt(Math.random() * fondo.length);
+        document.querySelector("body").style=`background-image: url(img/${fondo[i]}.png)`;
         document.querySelector("#lanzar").onclick=lanzar;
         document.querySelector("#cruz").onclick=cruz;
         for(let k=0;k<3;k++){
           document.querySelectorAll(".boton")[k].onclick=botones;
         }
-        moneda(Minicio);
-        console.log(document.querySelectorAll(".ventana")[0].innerHTML)
-        console.log(document.querySelectorAll(".ventana")[1].innerHTML)
-        console.log(document.querySelectorAll(".ventana")[2].innerHTML)
+        moneda(Minicio);   
       }
+
 
       /*Funcion principal de calculo del credito */
       function moneda(credito){
-        document.querySelector("#dinero").innerHTML=`${credito}<span class="euros">€</span>`;
+        document.querySelector("#dinero").innerHTML=`${credito}`;
         document.getElementById("monedas").innerHTML="";
         for(let k=0; k<=credito-1; k++){
           if(k%5==0 && k>0 && k<=15){
@@ -215,12 +283,22 @@
            
         }
       }
-
+      const tiempo = async () => {
+        await delay(2000);
+        document.getElementById("animacion").style="visibility:hidden";
+        document.getElementById("animacion1").style="visibility:hidden";
+        document.getElementById("animacion2").style="visibility:hidden";
+      }
       /*Funcion del boton principal redondo que deriva en la funcion ComprobarTirada() */
       function lanzar(){
         if(Minicio>0){
         let pokemon=document.querySelectorAll(".ventana")
         document.getElementById("audio").play();
+        document.getElementById("animacion").style="visibility:visible";
+        document.getElementById("animacion1").style="visibility:visible";
+        document.getElementById("animacion2").style="visibility:visible";
+        tiempo();
+
         let resul0= parseInt(Math.random() * pokemons.length);
         pokemon[0].innerHTML=`<img src="img/${pokemons[resul0]}.png">`
         let resul1= parseInt(Math.random() * pokemons.length);
@@ -234,18 +312,16 @@
       /*Funcion de comprobacion de botones inferiores y llamada a funcion ComprobarTirada() */
       
       function botones(){
-        let resul0=document.querySelectorAll(".ventana")[0].innerHTML
-        let resul1=document.querySelectorAll(".ventana")[1].innerHTML
-        let resul2=document.querySelectorAll(".ventana")[2].innerHTML
-        if(Minicio>0 || (resul0!=resul1 && resul1!=resul2)){
+
+        if(Minicio>0 || (imagen(0)!=imagen(1) && imagen(1)!=imagen(2))){
         document.getElementById("audio4").play();
           let boton=this.parentNode.children;
           for(let k=0;k<boton.length;k++){
             if(this==boton[k]){
-              let i = parseInt(Math.random() * pokemons.length)
-              document.querySelectorAll(".ventana")[k].innerHTML=`<img src="img/${pokemons[i]}.png">`
-            }
-          
+              let i = parseInt(Math.random() * 5)
+              let pokerep = pokemons.filter(pokemon=> pokemon!= palabra(imagen(k)));
+              document.querySelectorAll(".ventana")[k].innerHTML=`<img src="img/${pokerep[i]}.png">`
+            }          
           }
         }
         comprobarTirada();            
@@ -254,10 +330,7 @@
       /*Funcion derivada del evento .onclick de la cruz que aparece en la ventana oculta y que comprueba el resultado final */
       function cruz(){
         document.querySelector("#velo").style="display:none";
-        let resul0=document.querySelectorAll(".ventana")[0].innerHTML
-        let resul1=document.querySelectorAll(".ventana")[1].innerHTML
-        let resul2=document.querySelectorAll(".ventana")[2].innerHTML        
-        if(resul0==resul1 && resul1==resul2){
+        if(imagen(0)==imagen(1) && imagen(1)==imagen(2)){
           Minicio=Minicio+3;
           moneda(Minicio);
         }
@@ -270,10 +343,11 @@
         document.querySelector("#mensaje").style="padding-top:5%;";
         document.getElementById("audio3").play();
       }
+
       function perder(){
-        document.querySelector("#dinero").innerHTML=`0<span class="euros">€</span>`;
+        document.querySelector("#dinero").innerHTML=`0`;
         document.querySelector("#velo").style="display:flex";
-        document.querySelector("#mensaje").innerHTML='<img src="img/pokedoll.png"> Te has quedado sin monedas<img src="img/pokedoll.png">' 
+        document.querySelector("#mensaje").innerHTML='<img src="img/pokedoll.png"> Te has quedado sin fichas<img src="img/pokedoll.png">' 
         document.querySelector("#mensaje").style="padding-top:5%;";
         document.getElementById("audio2").play();
  
@@ -283,16 +357,36 @@
       function comprobarTirada(){
         Minicio--;
         moneda(Minicio);
-        let resul0=document.querySelectorAll(".ventana")[0].innerHTML
-        let resul1=document.querySelectorAll(".ventana")[1].innerHTML
-        let resul2=document.querySelectorAll(".ventana")[2].innerHTML
-        if(resul0==resul1 && resul1==resul2){
+        if(imagen(0)==imagen(1) && imagen(1)==imagen(2)){
           ganar();
         }
         else if(Minicio<0){
           perder();
         }
       }
+
+      function imagen(n){
+        return document.querySelectorAll(".ventana")[n].innerHTML;
+      }
+
+      function palabra(algo){
+        Array.from(algo);
+        let i= false;
+        let pokes="";
+        for(let k=0; k<algo.length; k++){
+          if(algo[k]=="/"){
+            i=true;
+          }
+          else if(i==true && algo[k]=="."){
+            i=false;
+          }
+          else if(i==true){
+            pokes= pokes+algo[k];
+          }
+        }
+        return pokes;
+      }
+
  </script>
 
 </head>
@@ -305,13 +399,17 @@
     <header>
     
       <div id="disponible">
-        <div id="credito">Fichas </div>
-        <div id="dinero"><span class="euros">€</span></div></div>
+        <div id="fichas">Fichas</div>
+        <div id="credito">0000</div>
+        <div id="dinero"></div></div>
         <div id="monedas"></div>
   
         <div id="lanzar"><img src="img/pokeball.png"></div>
     </header>
       <div class="ventanas">
+          <div id="animacion"><img src="img/tirada.gif"></div>
+          <div id="animacion1"><img src="img/tirada.gif"></div>
+          <div id="animacion2"><img src="img/tirada.gif"></div>
           <div class="ventana">
             <img src="img/bulbasur.png"></div>
           <div class="ventana">
