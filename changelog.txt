@@ -19,3 +19,12 @@ v1.2
 -Fondo y fuente modificada del mensaje de alerta
 -Contador de fichas LED
 -Animación de tirada
+
+v1.3
+
+-Nuevo menu desplegable
+-Opción de reset de fichas
+-Opción de cambio de fondo
+-Boton pokeball deshabilitado durante la animación de tirada
+-Botones de "volver a tirar" deshabilitados al principio y despues de una victoria
+-Estilos y funciones separados del documento html
