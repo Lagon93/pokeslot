@@ -11,13 +11,24 @@
     font-family: 'Helvetica', sans-serif;
     background-image: url(img/hierba.png);
     background-repeat: repeat;  /* La imagen se repite */
-    background-size: auto;  /* La imagen mantiene su tamaño original */
+    background-size: 5% ; /* La imagen mantiene su tamaño original */
     background-attachment: fixed; 
-  }
+    image-rendering: pixelated;
+    }
   img{
     max-width:100%;
     vertical-align:top;
   }
+
+  .poke {
+    width: 200px; /* Ajusta al tamaño deseado */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
   section{
     position:relative;
     width:550px;
@@ -56,6 +67,9 @@
     background-image: url(img/boton1.png);
     background-size: 100%;
     background-repeat: no-repeat;
+    background-color: transparent;  /* Asegura que no haya un fondo blanco */
+    border: none;  /* Elimina cualquier borde */
+
   }
 
   .boton:hover{
@@ -207,6 +221,7 @@
     justify-content:center;
     margin-top: 1%;
   }
+
   #animacion{
     visibility: hidden;
     margin-right: 66%;
@@ -347,4 +362,26 @@
 
   .ventana, .boton {
     transition: all 0.3s ease-in-out;
+  }
+
+  #oak{
+    margin-left: 16%;
+    margin-top: 20%;
+    position: absolute;
+  }
+
+  #oakmsg{
+    font-family: "Pokemon Classic";
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px double #333;
+  padding: 16px;
+  margin-top: 4%;
+  text-align: center;
+  border-radius: 8px;
+  color: #222;
+  width: 170px;
+  margin-left: 17%;
+  margin-right: auto;
+  height: 280px;
+  position: absolute;
   }
