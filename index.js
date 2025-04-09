@@ -164,7 +164,7 @@ async function mostrarAnimaciones(visible) {
     const intervalo = setInterval(async () => {
       const randomPokemon = pokemons[getRandomInt(0, pokemons.length - 1)];
       const imgUrl = await obtenerImagenPokemon(randomPokemon);
-      el.innerHTML = `<img src="${imgUrl}" alt="${randomPokemon}" style="width: 100px; height: 100px;">`;
+      el.innerHTML = `<img src="${imgUrl}" alt="${randomPokemon}" style="width: 150px; height: 150px;">`;
     }, 150);
 
     intervalos.push(intervalo);
@@ -190,7 +190,7 @@ async function cambiarSlot(pos) {
     const nuevo = opciones[getRandomInt(0, opciones.length - 1)];
     const imgUrl = await obtenerImagenPokemon(nuevo);
 
-    ventanas[pos].innerHTML = `<img src="${imgUrl}" alt="${nuevo}" style="width: 100px; height: 100px;">`;
+    ventanas[pos].innerHTML = `<img src="${imgUrl}" alt="${nuevo}" style="width: 150px; height: 150px;">`;
     document.getElementById("audio4").play();
 
     comprobarResultado();
@@ -243,7 +243,7 @@ function mostrarMensaje(tipo) {
 
   if (tipo === "ganar") {
     mensaje.innerHTML = '<img src="img/ice.png"> Has ganado tres <img src="img/ficha.png"> fichas extra! <img src="img/ice.png">';
-    cuadro.style.backgroundImage = "none";
+    cuadro.style.backgroundImage = "url(img/fondowin.png)";
     document.getElementById("audio3").play();
   } else {
     mensaje.innerHTML = '<img src="img/pokedoll.png"> Te has quedado sin fichas <img src="img/pokedoll.png">';

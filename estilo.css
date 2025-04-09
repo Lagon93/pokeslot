@@ -222,6 +222,7 @@
     margin-top: 1%;
   }
 
+
   #animacion{
     visibility: hidden;
     margin-right: 66%;
@@ -371,7 +372,7 @@
   }
 
   #oakmsg{
-    font-family: "Pokemon Classic";
+  font-family: "Pokemon Classic";
   background-color: rgba(255, 255, 255, 0.8);
   border: 3px double #333;
   padding: 16px;
