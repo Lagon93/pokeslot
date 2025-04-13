@@ -28,3 +28,11 @@ v1.3
 -Boton pokeball deshabilitado durante la animación de tirada
 -Botones de "volver a tirar" deshabilitados al principio y despues de una victoria
 -Estilos y funciones separados del documento html
+
+v1.4
+-Mejoras visuales al mostrar los Pokémon en la tirada
+-Mensajes dinámicos del Profesor Oak según el resultado
+-Sonido al cambiar individualmente un Pokémon
+-Animaciones de carga para cada ventana durante la tirada
+-Recompensa adicional por obtener un triple
+-Implementación de la PokeAPI

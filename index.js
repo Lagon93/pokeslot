@@ -49,7 +49,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 // Código que se ejecuta al cargar completamente la página
 window.onload = () => {
   // Selecciona aleatoriamente un fondo de pantalla al cargar
-  const fondosBody = ["arena.png", "hierba.png", "verde.png", "nieve.png"]; 
+  const fondosBody = ["arena.png", "hierba.png", "verde.png", "nieve.png", "piso.png"]; 
   const fondoAleatorio = fondosBody[getRandomInt(0, fondosBody.length - 1)];
   document.body.style.backgroundImage = `url("img/${fondoAleatorio}")`;
 
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   bgButton.addEventListener("click", function (e) {
     e.preventDefault(); // Previene el comportamiento por defecto del enlace
-    const fondosBody = ["arena.png", "hierba.png", "verde.png", "nieve.png"]; 
+    const fondosBody = ["arena.png", "hierba.png", "verde.png", "nieve.png", "piso.png"]; 
     const fondoAleatorio = fondosBody[getRandomInt(0, fondosBody.length - 1)];
     document.body.style.backgroundImage = `url("img/${fondoAleatorio}")`;
   });
