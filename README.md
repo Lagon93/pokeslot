@@ -2,7 +2,7 @@
 
 Una máquina tragaperras inspirada en Pokémon, hecha con HTML, CSS y JavaScript puro.
 
-![hippo]https://s5.ezgif.com/tmp/ezgif-5e035cb349ca57.gif
+![hippo](https://s5.ezgif.com/tmp/ezgif-5e035cb349ca57.gif)
 
 ## 👾 ¿Cómo funciona?
 
